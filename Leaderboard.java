@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 
 public class Leaderboard{
 
-    @Override
-    public void start(Stage primaryStage) {
+   
+    public void start(Stage LeaderBoardStage) {
         // Sample data for leaderboard
         ObservableList<String> leaderboardData = FXCollections.observableArrayList(
                 formatLeaderboardEntry(1, "Player A", 5000),
@@ -47,14 +47,13 @@ public class Leaderboard{
 
         // Scene creation
         Scene scene = new Scene(vbox, 800, 600);
-        primaryStage.setTitle("Leaderboard Screen");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        LeaderBoardStage.setTitle("Leaderboard Screen");
+        LeaderBoardStage.setScene(scene);
+        LeaderBoardStage.show();
     }
 
     private String formatLeaderboardEntry(int position, String playerName, int points) {
         return String.format("%-45s %-42s %d points", position, playerName, points);
     }
 
-}
 }

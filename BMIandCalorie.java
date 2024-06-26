@@ -13,7 +13,7 @@ public class BMIandCalorie {
 
     private static final String CSS_FILE = "styles.css";
 
-    @Override
+  
     public void start(Stage CalculationStage) {
         GridPane gridPane = createGridPane();
         Scene scene = new Scene(gridPane, 600, 400);
