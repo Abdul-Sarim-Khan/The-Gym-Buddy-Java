@@ -9,12 +9,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CommentBoxApp extends Application {
+public class CommentBoxApp{
 
     private Scene mainScene;
 
-    @Override
-    public void start(Stage primaryStage) {
+   
+    public void start(Stage CommentBoxStage) {
         // Create a TextArea for the comment box
         TextArea commentBox = new TextArea();
         commentBox.setPromptText("Enter your comment here...");
@@ -36,14 +36,14 @@ public class CommentBoxApp extends Application {
         mainScene = new Scene(vbox, 350, 300);
 
         // Event handlers for buttons to open new pages
-        button1.setOnAction(event -> openNewPage(primaryStage, "This is Page 1"));
-        button2.setOnAction(event -> openNewPage(primaryStage, "This is Page 2"));
-        button3.setOnAction(event -> openNewPage(primaryStage, "This is Page 3"));
+        button1.setOnAction(event -> openNewPage(CommentBoxStage, "This is Page 1"));
+        button2.setOnAction(event -> openNewPage(CommentBoxStage, "This is Page 2"));
+        button3.setOnAction(event -> openNewPage(CommentBoxStage, "This is Page 3"));
 
         // Set the title of the stage (window) and add the main scene to it
-        primaryStage.setTitle("Comment Box App");
-        primaryStage.setScene(mainScene);
-        primaryStage.show();
+        CommentBoxStage.setTitle("Comment Box App");
+        CommentBoxStage.setScene(mainScene);
+        CommentBoxStage.show();
     }
 
     private void openNewPage(Stage primaryStage, String message) {
@@ -65,7 +65,5 @@ public class CommentBoxApp extends Application {
         primaryStage.setScene(newScene);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+   
 }

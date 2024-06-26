@@ -20,10 +20,10 @@ import javafx.util.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Dashboard extends Application {
+public class Dashboard {
 
-    @Override  
-    public void start(Stage primaryStage) {  
+  
+    public void start(Stage DashboardStage) {  
 
         // Top bar with the dashboard label and clock  
         Label dashboardLabel = new Label("Dashboard | Overview");  
@@ -113,9 +113,9 @@ public class Dashboard extends Application {
         root.setCenter(mainContent);  
 
         Scene scene = new Scene(root, 1020, 600);  
-        primaryStage.setTitle("Gym Buddy Dashboard");  
-        primaryStage.setScene(scene);  
-        primaryStage.show();  
+        DashboardStage.setTitle("Gym Buddy Dashboard");  
+        DashboardStage.setScene(scene);  
+        DashboardStage.show();  
     }  
 
     private Button createSidebarButton(String text) {  
@@ -143,7 +143,5 @@ public class Dashboard extends Application {
         button.setOnMouseExited(e -> button.setStyle("-fx-background-color: " + baseColor + "; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
     }
 
-    public static void main(String[] args) {  
-        launch(args);  
-    }
+  
 }

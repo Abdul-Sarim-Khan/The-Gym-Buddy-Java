@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/*Username: admin
+Password: admin1*/
 
 public class GYM_BUDDY extends Application {
 	private Stage primaryStage;
@@ -96,6 +98,9 @@ public class GYM_BUDDY extends Application {
 
             if (authenticate(username, password)) {
                 showDashboard();
+                showBMIandCalorie();
+                showLeaderboard();
+                showCommentBox();
             } else {
                 System.out.println("Login failed.");
             }
@@ -198,7 +203,7 @@ public class GYM_BUDDY extends Application {
 
     private boolean authenticate(String username, String password) {
         // This is a simple example, in a real application you should check the credentials against a database or another secure source
-        return "user".equals(username) && "password".equals(password);
+        return "admin".equals(username) && "admin1".equals(password);
     }
 
     private void showDashboard() {
@@ -209,4 +214,33 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
+    
+    private void showBMIandCalorie() {
+        try {
+            new BMIandCalorie().start(new Stage());
+            primaryStage.close(); // Close the login stage
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void showLeaderboard() {
+        try {
+            new Leaderboard().start(new Stage());
+            primaryStage.close(); // Close the login stage
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void showCommentBox() {
+        try {
+            new CommentBoxApp().start(new Stage());
+            primaryStage.close(); // Close the login stage
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 }
