@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 /*Username: admin
 Password: admin1*/
 
@@ -124,10 +125,10 @@ public class GYM_BUDDY extends Application {
             String password = pwField.getText();
 
             if (authenticate(username, password)) {
-              // showDashboard();
-               showBMIandCalorie();
-              // showLeaderboard();
-              // showWorkoutPlanSuggestor();
+            	showDashboard();
+            	//showBMIandCalorie();
+            	//showLeaderboard();
+              	//showWorkoutPlanSuggestor();
             } else {
                 System.out.println("Login failed.");
             }

@@ -5,13 +5,19 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.time.LocalTime;
@@ -20,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 public class Dashboard {
 
     public void start(Stage DashboardStage) {
-    	// Top bar with the dashboard label and clock
+        // Top bar with the dashboard label and clock
         Label dashboardLabel = new Label("Dashboard | Overview");
         dashboardLabel.setFont(new Font("Arial", 30));
         dashboardLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 15px 40px 0 0");
@@ -105,16 +111,22 @@ public class Dashboard {
 
         buttonRow.getChildren().addAll(leaderBoardContainer, pointsContainer, bmiContainer, weightContainer);
 
-        Label weeklyProgressReport = new Label("Weekly Progress Report");
+        Label weeklyProgressReport = new Label("Monthly Progress Report");
         weeklyProgressReport.setFont(new Font("Arial", 28));
-        weeklyProgressReport.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 0 200px;");
+        weeklyProgressReport.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 0 180px;");
 
         HBox reportBox = new HBox();
         reportBox.getChildren().addAll(weeklyProgressReport);
         reportBox.setPadding(new Insets(10));
         reportBox.setStyle("-fx-alignment: center-right;");
 
-        mainContent.getChildren().addAll(buttonRow, reportBox);
+        LineChart<String, Number> weightChart = createWeightChart();
+
+        VBox chartContainer = new VBox(20, reportBox, weightChart);
+        chartContainer.setPadding(new Insets(20));
+        chartContainer.setStyle("-fx-background-color: black;");
+
+        mainContent.getChildren().addAll(buttonRow, chartContainer);
         mainContent.setStyle("-fx-background-color: black; -fx-padding: 20;");
 
         BorderPane root = new BorderPane();
@@ -122,7 +134,7 @@ public class Dashboard {
         root.setLeft(sidebar);
         root.setCenter(mainContent);
 
-        Scene scene = new Scene(root, 1020, 660);
+        Scene scene = new Scene(root, 1030, 660);
         DashboardStage.setTitle("Gym Buddy Dashboard");
         DashboardStage.setScene(scene);
         DashboardStage.show();
@@ -148,9 +160,9 @@ public class Dashboard {
         container.setAlignment(Pos.CENTER);
         return container;
     }
- 
+
     private void applyButtonHoverEffect(Button button) {
-    	button.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        button.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
         button.setOnMouseEntered(e -> button.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
         button.setOnMouseExited(e -> button.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
     }
@@ -159,4 +171,59 @@ public class Dashboard {
         button.setOnMouseEntered(e -> button.setStyle("-fx-background-color: " + hoverColor + "; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
         button.setOnMouseExited(e -> button.setStyle("-fx-background-color: " + baseColor + "; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
     }
+
+    private LineChart<String, Number> createWeightChart() {
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Date");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Weight");
+
+        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Weight Progress");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Weight Data");
+
+        // Add data points
+        series.getData().add(new XYChart.Data<>("4/16/2023", 30));
+        series.getData().add(new XYChart.Data<>("4/23/2023", 70));
+        series.getData().add(new XYChart.Data<>("4/30/2023", 50));
+        series.getData().add(new XYChart.Data<>("5/7/2023", 80));
+        series.getData().add(new XYChart.Data<>("5/14/2023", 60));
+        series.getData().add(new XYChart.Data<>("5/21/2023", 55));
+        series.getData().add(new XYChart.Data<>("5/28/2023", 65));
+        series.getData().add(new XYChart.Data<>("6/4/2023", 85));
+        series.getData().add(new XYChart.Data<>("6/11/2023", 100));
+        series.getData().add(new XYChart.Data<>("6/18/2023", 90));
+        series.getData().add(new XYChart.Data<>("6/25/2023", 75));
+
+        lineChart.getData().add(series);
+
+        // Apply CSS styling
+        lineChart.setStyle("-fx-text-fill: #00C958;");
+        xAxis.setStyle("-fx-text-fill: #00C958;");
+        yAxis.setStyle("-fx-text-fill: #00C958;");
+
+        // Set line color to green
+        series.getNode().setStyle("-fx-stroke: green;");
+
+        // Set chart title text color and font weight
+        lineChart.lookup(".chart-title").setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold;");
+
+        // Set axis labels to white with increased font size and bold weight
+        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        yAxis.lookup(".axis-label").setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+
+        // Set tick label color to white using inline CSS
+        lineChart.applyCss();  // Ensure CSS is applied
+        xAxis.lookupAll(".axis-tick-mark-label").forEach(label -> ((Text)label).setStyle("-fx-fill: white;"));
+        yAxis.lookupAll(".axis-tick-mark-label").forEach(label -> ((Text)label).setStyle("-fx-fill: white;"));
+
+        return lineChart;
+    }
+
+
+
+
 }
