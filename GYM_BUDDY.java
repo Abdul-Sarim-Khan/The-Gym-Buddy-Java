@@ -125,9 +125,9 @@ public class GYM_BUDDY extends Application {
 
             if (authenticate(username, password)) {
                 showDashboard();
-               // showBMIandCalorie();
-            //   showLeaderboard();
-               //	 showCommentBox();
+               showBMIandCalorie();
+            showLeaderboard();
+               // showCommentBox();
             } else {
                 System.out.println("Login failed.");
             }
@@ -279,7 +279,7 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-    /* 
+    
     private void showBMIandCalorie() {
         try {
             new BMIandCalorie().start(new Stage());
@@ -288,7 +288,7 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-    */
+    
    private void showLeaderboard() {
         try {
             new Leaderboard().start(new Stage());

@@ -36,7 +36,7 @@ public class Leaderboard{
         headingLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold");
 
         ListView<String> leaderboardListView = new ListView<>(leaderboardData);
-        leaderboardListView.setStyle("-fx-background-color: #00C958; -fx-font-size: 20px; -fx-font-weight: bold");
+        leaderboardListView.setStyle("-fx-control-inner-background: #333333; -fx-background-color: #00C958; -fx-font-size: 20px; -fx-font-weight: bold");
         leaderboardListView.setPrefHeight(400);
 
         // VBox layout for the screen
