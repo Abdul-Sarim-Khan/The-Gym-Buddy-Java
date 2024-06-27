@@ -125,9 +125,9 @@ public class GYM_BUDDY extends Application {
 
             if (authenticate(username, password)) {
                 showDashboard();
-               // showBMIandCalorie();
-            //   showLeaderboard();
-               //	 showCommentBox();
+               		showBMIandCalorie();
+           		showLeaderboard();
+               		showCommentBox();
             } else {
                 System.out.println("Login failed.");
             }
