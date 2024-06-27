@@ -124,10 +124,10 @@ public class GYM_BUDDY extends Application {
             String password = pwField.getText();
 
             if (authenticate(username, password)) {
-               showDashboard();
+              // showDashboard();
                showBMIandCalorie();
-               showLeaderboard();
-               showWorkoutPlanSuggestor();
+              // showLeaderboard();
+              // showWorkoutPlanSuggestor();
             } else {
                 System.out.println("Login failed.");
             }

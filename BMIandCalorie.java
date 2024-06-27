@@ -16,7 +16,7 @@ public class BMIandCalorie extends Application {
     @Override
     public void start(Stage CalculationStage) {
         GridPane gridPane = createGridPane();
-        Scene scene = new Scene(gridPane, 600, 400);
+        Scene scene = new Scene(gridPane, 700, 500);
         scene.setFill(Color.web("#000000")); // Set scene background color
         scene.getStylesheets().add(getClass().getResource(CSS_FILE).toExternalForm());
 
@@ -32,10 +32,10 @@ public class BMIandCalorie extends Application {
         gridPane.setVgap(10);
 
         ColumnConstraints labelColumn = new ColumnConstraints();
-        labelColumn.setPercentWidth(50);
-        ColumnConstraints fieldColumn = new ColumnConstraints();
-        fieldColumn.setPercentWidth(50);
-        gridPane.getColumnConstraints().addAll(labelColumn, fieldColumn);
+        labelColumn.setPrefWidth(300);
+
+
+        gridPane.getColumnConstraints().addAll(labelColumn);
 
         addUIControls(gridPane);
         return gridPane;
@@ -50,16 +50,24 @@ public class BMIandCalorie extends Application {
         gridPane.add(createTextField(), 1, 2);
         gridPane.add(createLabel("Gender:"), 0, 3);
         gridPane.add(createGenderChoiceBox(), 1, 3);
+        gridPane.add(createLabel("Health Condition:"), 0, 4);
+        gridPane.add(createHealthConditionChoiceBox(), 1, 4);
 
         Button calculateButton = new Button("Calculate BMI and Calorie Burn");
         calculateButton.getStyleClass().add("calculate-button");
-        gridPane.add(calculateButton, 0, 4, 2, 1);
+        gridPane.add(calculateButton, 0, 6, 2, 1);
+
+        Label ConditionLabel = new Label();
+        ConditionLabel.setPrefWidth(800); // Set preferred width to ensure full text is visible
+        ConditionLabel.setWrapText(true); // Enable text wrapping for long advice
+        gridPane.add(ConditionLabel, 0, 10, 2, 1);
+        ConditionLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
         Label resultLabel = new Label();
         resultLabel.getStyleClass().add("result-label");
-        gridPane.add(resultLabel, 0, 5, 2, 1);
+        gridPane.add(resultLabel, 0, 7, 2, 1);
 
-        calculateButton.setOnAction(e -> calculateBMIAndCalories(gridPane, resultLabel));
+        calculateButton.setOnAction(e -> calculateBMIAndCalories(gridPane, resultLabel, ConditionLabel));
     }
 
     private Label createLabel(String labelText) {
@@ -76,25 +84,33 @@ public class BMIandCalorie extends Application {
 
     private ChoiceBox<String> createGenderChoiceBox() {
         ChoiceBox<String> genderChoiceBox = new ChoiceBox<>();
-        genderChoiceBox.setPrefWidth(150);
         genderChoiceBox.getStyleClass().add("choice-box");
         genderChoiceBox.getItems().addAll("Male", "Female");
         return genderChoiceBox;
     }
 
-    private void calculateBMIAndCalories(GridPane gridPane, Label resultLabel) {
+    private ChoiceBox<String> createHealthConditionChoiceBox() {
+        ChoiceBox<String> healthConditionChoiceBox = new ChoiceBox<>();
+        healthConditionChoiceBox.getStyleClass().add("choice-box");
+        healthConditionChoiceBox.getItems().addAll("No Health Condition", "Heart Disease", "High Blood Pressure", "Chronic Pain", "Back Or Joint Pain");
+        return healthConditionChoiceBox;
+    }
+
+    private void calculateBMIAndCalories(GridPane gridPane, Label resultLabel, Label ConditionLabel) {
         TextField weightField = (TextField) gridPane.getChildren().get(1);
         TextField heightField = (TextField) gridPane.getChildren().get(3);
         TextField ageField = (TextField) gridPane.getChildren().get(5);
         ChoiceBox<String> genderChoiceBox = (ChoiceBox<String>) gridPane.getChildren().get(7);
+        ChoiceBox<String> healthConditionChoiceBox = (ChoiceBox<String>) gridPane.getChildren().get(9);
 
         try {
             double weightKgs = Double.parseDouble(weightField.getText());
             double heightCm = Double.parseDouble(heightField.getText());
             int age = Integer.parseInt(ageField.getText());
             String gender = genderChoiceBox.getValue();
+            String healthCondition = healthConditionChoiceBox.getValue();
 
-            if (weightKgs <= 0 || heightCm <= 0 || age <= 0 || gender == null) {
+            if (weightKgs <= 0 || heightCm <= 0 || age <= 0 || gender == null || healthCondition == null) {
                 throw new NumberFormatException();
             }
 
@@ -109,8 +125,12 @@ public class BMIandCalorie extends Application {
             resultLabel.setText("BMI: " + bmiText + " (" + bmiClassification + ")\nEstimated Calorie Burn: " + caloriesText + " kcal/day");
             resultLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
+            String healthAdvice = getHealthAdvice(healthCondition);
+            ConditionLabel.setText(healthAdvice);
+            ConditionLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
+
         } catch (NumberFormatException ex) {
-            resultLabel.setText("Invalid input. Please enter valid numbers and select gender.");
+            resultLabel.setText("Invalid input. Please enter valid numbers and select all fields.");
             resultLabel.setStyle("-fx-text-fill: #FF0000; -fx-font-size: 16px; -fx-font-weight: bold");
         }
     }
@@ -155,6 +175,23 @@ public class BMIandCalorie extends Application {
         }
 
         return totalCaloriesBurned;
+    }
+
+    private String getHealthAdvice(String healthCondition) {
+        switch (healthCondition) {
+            case "No Health Condition":
+                return "Maintain regular physical activity and a balanced diet.";
+            case "Heart Disease":
+                return "Focus on a heart-healthy diet, regular exercise, and stress management. Avoid smoking and excessive alcohol consumption.";
+            case "High Blood Pressure":
+                return "Limit salt intake, maintain a healthy weight, exercise regularly, and manage stress. Avoid excessive caffeine and alcohol.";
+            case "Chronic Pain":
+                return "Consult a healthcare professional for pain management strategies. Avoid prolonged inactivity and overuse of pain medications.";
+            case "Back Or Joint Pain":
+                return "Strengthen core muscles, maintain good posture, and avoid heavy lifting. Consult a physical therapist for personalized guidance. Avoid prolonged sitting and poor ergonomics.";
+            default:
+                return "Consult a healthcare professional for personalized advice.";
+        }
     }
 
     public static void main(String[] args) {

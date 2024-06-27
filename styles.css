@@ -1,5 +1,3 @@
-/* styles.css */
-
 .root {
     -fx-background-color: black;
 }
@@ -10,13 +8,13 @@
     -fx-font-weight: bold;
 }
 
-.input-field, .choice-box {
-    -fx-pref-height: 20px;
-    -fx-border-color: #00C958;
-    -fx-pref-width: 150px;
-    -fx-background-color: #333333;
-}
 
+.choice-box, .input-field {
+	-fx-background-color: #333333;
+	-fx-pref-height: 20px;
+	-fx-border-color: #00C958;
+	-fx-pref-width: 300px;
+}
 .choice-box .menu-item {
     -fx-background-color: #333333; /* Set background color for dropdown items */
     -fx-text-fill: #FFFFFF; /* Set text color for dropdown items */
