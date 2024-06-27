@@ -29,11 +29,11 @@ public class Leaderboard{
 
         // Creating UI elements
         Label titleLabel = new Label("LEADERBOARD");
-        titleLabel.setStyle("-fx-font-size: 30px; -fx-text-fill: white; -fx-font-weight: bold");
+        titleLabel.setStyle("-fx-font-size: 30px; -fx-text-fill: #00C958; -fx-font-weight: bold");
         titleLabel.setPadding(new Insets(20, 0, 20, 0));
 
         Label headingLabel = new Label(String.format("%-35s %-35s %s", "Position", "Name", "Points"));
-        headingLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: #00C958; -fx-font-weight: bold");
+        headingLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-font-weight: bold");
 
         ListView<String> leaderboardListView = new ListView<>(leaderboardData);
         leaderboardListView.setStyle("-fx-background-color: #00C958; -fx-font-size: 20px; -fx-font-weight: bold");
@@ -42,7 +42,7 @@ public class Leaderboard{
         // VBox layout for the screen
         VBox vbox = new VBox(20);
         vbox.setPadding(new Insets(20));
-        vbox.setBackground(new Background(new BackgroundFill(Color.rgb(51, 51, 51), CornerRadii.EMPTY, Insets.EMPTY))); // Set overall background color
+        vbox.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0), CornerRadii.EMPTY, Insets.EMPTY))); // Set overall background color
         vbox.getChildren().addAll(titleLabel, headingLabel, leaderboardListView);
 
         // Scene creation

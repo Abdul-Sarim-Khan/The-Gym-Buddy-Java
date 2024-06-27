@@ -2,7 +2,6 @@ package application;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -52,8 +51,7 @@ public class Dashboard {
         Label gymBuddyLabel = new Label("GYM BUDDY");  
         gymBuddyLabel.setFont(new Font("Arial", 28));  
         gymBuddyLabel.setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold;");  
-        gymBuddyLabel.setEffect(new DropShadow(10, Color.BLACK));  
-        sidebar.setEffect(new DropShadow(10, Color.BLACK));  
+      
 
         Button homeButton = createSidebarButton("Home");  
         Button createAccountButton = createSidebarButton("Create User Account");  

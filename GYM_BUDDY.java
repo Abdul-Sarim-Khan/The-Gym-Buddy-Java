@@ -28,7 +28,7 @@ public class GYM_BUDDY extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("THE GYM BUDDY");
 
         showLoginForm();
     }
@@ -37,8 +37,8 @@ public class GYM_BUDDY extends Application {
         // Create the heading
         Label heading = new Label("WELCOME TO GYM BUDDY");
         heading.setFont(new Font("Arial", 24));
-        heading.setTextFill(Color.RED);
-        heading.setStyle("-fx-text-fill: red; -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-alignment: center;");
+       
+        heading.setStyle("-fx-text-fill: #00C958; -fx-font-size: 24px; -fx-font-weight: bold;");
         heading.setAlignment(Pos.CENTER);
 
         // Create the grid pane for login
@@ -50,17 +50,44 @@ public class GYM_BUDDY extends Application {
         // Create the login components
         Label userLabel = new Label("Username:");
         userLabel.setTextFill(Color.WHITE);
+        userLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
         TextField userTextField = new TextField();
-        userTextField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        userTextField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+        
         Label pwLabel = new Label("Password:");
-        pwLabel.setTextFill(Color.WHITE);
+        pwLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        
         PasswordField pwField = new PasswordField();
-        pwField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        pwField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
         Button loginButton = new Button("Login");
-        loginButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-        Hyperlink signUpLink = new Hyperlink("New user?");
-        signUpLink.setStyle("-fx-text-fill: red;");
 
+     // Set initial style
+     loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+     // Mouse entered style
+     loginButton.setOnMouseEntered(e -> {
+         loginButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 14px; -fx-font-weight: bold;");
+     });
+
+     // Mouse exited style
+     loginButton.setOnMouseExited(e -> {
+         loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+     });
+        
+        Hyperlink signUpLink = new Hyperlink("New user?");
+        signUpLink.setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold;");
+        
+        signUpLink.setOnMouseEntered(e -> {
+        	signUpLink.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+            signUpLink.getScene().setCursor(javafx.scene.Cursor.HAND);
+        });
+        signUpLink.setOnMouseExited(e -> {
+        	signUpLink.setStyle("-fx-text-fill: #00C958; -fx-font-size: 12px; -fx-font-weight: bold;");
+        	signUpLink.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
+        });
+        
         // Add components to the login grid
         loginGrid.add(userLabel, 0, 0);
         loginGrid.add(userTextField, 1, 0);
@@ -98,9 +125,9 @@ public class GYM_BUDDY extends Application {
 
             if (authenticate(username, password)) {
                 showDashboard();
-                showBMIandCalorie();
-                showLeaderboard();
-                showCommentBox();
+               // showBMIandCalorie();
+               showLeaderboard();
+               //	 showCommentBox();
             } else {
                 System.out.println("Login failed.");
             }
@@ -111,8 +138,7 @@ public class GYM_BUDDY extends Application {
         // Create the heading
         Label heading = new Label("REGISTER");
         heading.setFont(new Font("Arial", 24));
-        heading.setTextFill(Color.RED);
-        heading.setStyle("-fx-text-fill: red; -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-alignment: center;");
+        heading.setStyle("-fx-text-fill: #00C958; -fx-font-size: 24px; -fx-font-weight: bold;");
         heading.setAlignment(Pos.CENTER);
 
         // Create the grid pane for registration
@@ -123,26 +149,65 @@ public class GYM_BUDDY extends Application {
 
         // Create the registration components
         Label firstNameLabel = new Label("First Name:");
-        firstNameLabel.setTextFill(Color.WHITE);
+        firstNameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        
         TextField firstNameField = new TextField();
-        firstNameField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        firstNameField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+        
+        
         Label lastNameLabel = new Label("Last Name:");
-        lastNameLabel.setTextFill(Color.WHITE);
+        lastNameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        
         TextField lastNameField = new TextField();
-        lastNameField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        lastNameField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+        
+        
         Label emailLabel = new Label("Email:");
-        emailLabel.setTextFill(Color.WHITE);
+        emailLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        
         TextField emailField = new TextField();
-        emailField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        emailField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+        
+        
         Label dobLabel = new Label("Date of Birth:");
-        dobLabel.setTextFill(Color.WHITE);
+        dobLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        
         TextField dobField = new TextField();
-        dobField.setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        Button registerButton = new Button("Register");
-        registerButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-        Hyperlink oldUserLink = new Hyperlink("Old user?");
-        oldUserLink.setStyle("-fx-text-fill: red;");
+        dobField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+        
+        Button loginButton = new Button("Register");
 
+        // Set initial style
+        loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+
+        // Mouse entered style
+        loginButton.setOnMouseEntered(e -> {
+            loginButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 14px; -fx-font-weight: bold;");
+        });
+
+        // Mouse exited style
+        loginButton.setOnMouseExited(e -> {
+            loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+        });
+        
+
+        Hyperlink oldUserLink = new Hyperlink("Old user?");
+        oldUserLink.setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold;");
+        
+        oldUserLink.setOnMouseEntered(e -> {
+        	oldUserLink.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+        	oldUserLink.getScene().setCursor(javafx.scene.Cursor.HAND);
+        });
+        oldUserLink.setOnMouseExited(e -> {
+        	oldUserLink.setStyle("-fx-text-fill: #00C958; -fx-font-size: 12px; -fx-font-weight: bold;");
+        	oldUserLink.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
+        });
+        
+        
         // Add components to the registration grid
         regGrid.add(firstNameLabel, 0, 0);
         regGrid.add(firstNameField, 1, 0);
@@ -152,7 +217,7 @@ public class GYM_BUDDY extends Application {
         regGrid.add(emailField, 1, 2);
         regGrid.add(dobLabel, 0, 3);
         regGrid.add(dobField, 1, 3);
-        regGrid.add(registerButton, 1, 4);
+        regGrid.add(loginButton, 1, 4);
         regGrid.add(oldUserLink, 1, 5);
 
         // Center the components within their cells
@@ -164,14 +229,14 @@ public class GYM_BUDDY extends Application {
         GridPane.setHalignment(emailField, HPos.CENTER);
         GridPane.setHalignment(dobLabel, HPos.CENTER);
         GridPane.setHalignment(dobField, HPos.CENTER);
-        GridPane.setHalignment(registerButton, HPos.CENTER);
+        GridPane.setHalignment(loginButton, HPos.CENTER);
         GridPane.setHalignment(oldUserLink, HPos.CENTER);
 
         // Create a VBox to center the grid and add the heading at the top
         VBox vbox = new VBox(20); // 20 is the spacing between elements
         vbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(heading, regGrid);
-        vbox.setStyle("-fx-background-color: black;");
+        vbox.setStyle("-fx-background-color: black");
 
         // Set up the scene and stage
         Scene regScene = new Scene(vbox, 600, 500);
@@ -179,7 +244,7 @@ public class GYM_BUDDY extends Application {
         primaryStage.show();
 
         // Handle the register button action
-        registerButton.setOnAction(e -> {
+        loginButton.setOnAction(e -> {
             // Registration logic goes here (e.g., saving the user's data)
             // For now, we'll just print the entered data to the console
             String firstName = firstNameField.getText();
@@ -214,7 +279,7 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-    
+    /* 
     private void showBMIandCalorie() {
         try {
             new BMIandCalorie().start(new Stage());
@@ -223,8 +288,8 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-    
-    private void showLeaderboard() {
+    */
+   private void showLeaderboard() {
         try {
             new Leaderboard().start(new Stage());
             primaryStage.close(); // Close the login stage
@@ -232,7 +297,7 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-    
+   /* 
     private void showCommentBox() {
         try {
             new CommentBoxApp().start(new Stage());
@@ -242,5 +307,5 @@ public class GYM_BUDDY extends Application {
         }
     }
     
-    
+    */
 }

@@ -9,15 +9,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class BMIandCalorie {
+public class BMIandCalorie extends Application {
 
     private static final String CSS_FILE = "styles.css";
 
-  
+    @Override
     public void start(Stage CalculationStage) {
         GridPane gridPane = createGridPane();
         Scene scene = new Scene(gridPane, 600, 400);
-        scene.setFill(Color.web("#333333")); // Set scene background color
+        scene.setFill(Color.web("#000000")); // Set scene background color
         scene.getStylesheets().add(getClass().getResource(CSS_FILE).toExternalForm());
 
         CalculationStage.setTitle("BMI Calculator and Calorie Burn Estimation");
@@ -79,10 +79,6 @@ public class BMIandCalorie {
         genderChoiceBox.setPrefWidth(150);
         genderChoiceBox.getStyleClass().add("choice-box");
         genderChoiceBox.getItems().addAll("Male", "Female");
-
-        // Set the text color and background color
-        genderChoiceBox.setStyle("-fx-text-fill: white; -fx-background-color: #333333;");
-
         return genderChoiceBox;
     }
 
@@ -161,5 +157,7 @@ public class BMIandCalorie {
         return totalCaloriesBurned;
     }
 
-   
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
