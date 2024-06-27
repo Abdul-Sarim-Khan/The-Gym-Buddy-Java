@@ -124,10 +124,10 @@ public class GYM_BUDDY extends Application {
             String password = pwField.getText();
 
             if (authenticate(username, password)) {
-                showDashboard();
+               showDashboard();
                showBMIandCalorie();
-            showLeaderboard();
-               // showCommentBox();
+               showLeaderboard();
+               showWorkoutPlanSuggestor();
             } else {
                 System.out.println("Login failed.");
             }
@@ -297,15 +297,15 @@ public class GYM_BUDDY extends Application {
             e.printStackTrace();
         }
     }
-   /* 
-    private void showCommentBox() {
+   
+    private void showWorkoutPlanSuggestor() {
         try {
-            new CommentBoxApp().start(new Stage());
+            new WorkoutPlanSuggestor().start(new Stage());
             primaryStage.close(); // Close the login stage
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    */
+    
 }
