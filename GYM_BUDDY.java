@@ -150,86 +150,100 @@ public class GYM_BUDDY extends Application {
         // Create the registration components
         Label firstNameLabel = new Label("First Name:");
         firstNameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
-        
-        
         TextField firstNameField = new TextField();
         firstNameField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
-        
-        
+
         Label lastNameLabel = new Label("Last Name:");
         lastNameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
-        
-        
         TextField lastNameField = new TextField();
         lastNameField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
-        
-        
+
+        Label usernameLabel = new Label("Username:");
+        usernameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        TextField usernameField = new TextField();
+        usernameField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+
+        Label passwordLabel = new Label("Password:");
+        passwordLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+
+        Label confirmPasswordLabel = new Label("Confirm Password:");
+        confirmPasswordLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        PasswordField confirmPasswordField = new PasswordField();
+        confirmPasswordField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
+
         Label emailLabel = new Label("Email:");
         emailLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
-        
-        
         TextField emailField = new TextField();
         emailField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
-        
-        
+
         Label dobLabel = new Label("Date of Birth:");
         dobLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
-        
-        
         TextField dobField = new TextField();
         dobField.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #333333; -fx-pref-height: 20px; -fx-border-color: #00C958; -fx-pref-width: 170px;");
-        
-        Button loginButton = new Button("Register");
+
+        Button registerButton = new Button("Register");
 
         // Set initial style
-        loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+        registerButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
 
         // Mouse entered style
-        loginButton.setOnMouseEntered(e -> {
-            loginButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 14px; -fx-font-weight: bold;");
+        registerButton.setOnMouseEntered(e -> {
+            registerButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 14px; -fx-font-weight: bold;");
         });
 
         // Mouse exited style
-        loginButton.setOnMouseExited(e -> {
-            loginButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+        registerButton.setOnMouseExited(e -> {
+            registerButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
         });
-        
 
         Hyperlink oldUserLink = new Hyperlink("Old user?");
         oldUserLink.setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold;");
-        
+
         oldUserLink.setOnMouseEntered(e -> {
-        	oldUserLink.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
-        	oldUserLink.getScene().setCursor(javafx.scene.Cursor.HAND);
+            oldUserLink.setStyle("-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;");
+            oldUserLink.getScene().setCursor(javafx.scene.Cursor.HAND);
         });
         oldUserLink.setOnMouseExited(e -> {
-        	oldUserLink.setStyle("-fx-text-fill: #00C958; -fx-font-size: 12px; -fx-font-weight: bold;");
-        	oldUserLink.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
+            oldUserLink.setStyle("-fx-text-fill: #00C958; -fx-font-size: 12px; -fx-font-weight: bold;");
+            oldUserLink.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
         });
-        
-        
+
         // Add components to the registration grid
         regGrid.add(firstNameLabel, 0, 0);
         regGrid.add(firstNameField, 1, 0);
         regGrid.add(lastNameLabel, 0, 1);
         regGrid.add(lastNameField, 1, 1);
-        regGrid.add(emailLabel, 0, 2);
-        regGrid.add(emailField, 1, 2);
-        regGrid.add(dobLabel, 0, 3);
-        regGrid.add(dobField, 1, 3);
-        regGrid.add(loginButton, 1, 4);
-        regGrid.add(oldUserLink, 1, 5);
+        regGrid.add(usernameLabel, 0, 2);
+        regGrid.add(usernameField, 1, 2);
+        regGrid.add(passwordLabel, 0, 3);
+        regGrid.add(passwordField, 1, 3);
+        regGrid.add(confirmPasswordLabel, 0, 4);
+        regGrid.add(confirmPasswordField, 1, 4);
+        regGrid.add(emailLabel, 0, 5);
+        regGrid.add(emailField, 1, 5);
+        regGrid.add(dobLabel, 0, 6);
+        regGrid.add(dobField, 1, 6);
+        regGrid.add(registerButton, 1, 7);
+        regGrid.add(oldUserLink, 1, 8);
 
         // Center the components within their cells
         GridPane.setHalignment(firstNameLabel, HPos.CENTER);
         GridPane.setHalignment(firstNameField, HPos.CENTER);
         GridPane.setHalignment(lastNameLabel, HPos.CENTER);
         GridPane.setHalignment(lastNameField, HPos.CENTER);
+        GridPane.setHalignment(usernameLabel, HPos.CENTER);
+        GridPane.setHalignment(usernameField, HPos.CENTER);
+        GridPane.setHalignment(passwordLabel, HPos.CENTER);
+        GridPane.setHalignment(passwordField, HPos.CENTER);
+        GridPane.setHalignment(confirmPasswordLabel, HPos.CENTER);
+        GridPane.setHalignment(confirmPasswordField, HPos.CENTER);
         GridPane.setHalignment(emailLabel, HPos.CENTER);
         GridPane.setHalignment(emailField, HPos.CENTER);
         GridPane.setHalignment(dobLabel, HPos.CENTER);
         GridPane.setHalignment(dobField, HPos.CENTER);
-        GridPane.setHalignment(loginButton, HPos.CENTER);
+        GridPane.setHalignment(registerButton, HPos.CENTER);
         GridPane.setHalignment(oldUserLink, HPos.CENTER);
 
         // Create a VBox to center the grid and add the heading at the top
@@ -244,7 +258,71 @@ public class GYM_BUDDY extends Application {
         primaryStage.show();
 
         // Handle the register button action
-        loginButton.setOnAction(e -> {
+        registerButton.setOnAction(e -> {
+            // Registration logic goes here (e.g., validate fields, save data)
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            String confirmPassword = confirmPasswordField.getText();
+            String email = emailField.getText();
+            String dob = dobField.getText();
+
+            // Example validation (you should add more comprehensive checks)
+            if (!password.equals(confirmPassword)) {
+                System.out.println("Passwords do not match. Please try again.");
+                return;
+            }
+
+            // Example output (replace with actual registration logic)
+            System.out.println("Registered successfully with the following details:");
+            System.out.println("First Name: " + firstName);
+            System.out.println("Last Name: " + lastName);
+            System.out.println("Username: " + username);
+            System.out.println("Email: " + email);
+            System.out.println("Date of Birth: " + dob);
+
+            // After registration, show the login form again
+            showLoginForm();
+        });
+        
+        // Add components to the registration grid
+        regGrid.add(firstNameLabel, 0, 0);
+        regGrid.add(firstNameField, 1, 0);
+        regGrid.add(lastNameLabel, 0, 1);
+        regGrid.add(lastNameField, 1, 1);
+        regGrid.add(emailLabel, 0, 2);
+        regGrid.add(emailField, 1, 2);
+        regGrid.add(dobLabel, 0, 3);
+        regGrid.add(dobField, 1, 3);
+        regGrid.add(dobField, 1, 4);
+        regGrid.add(oldUserLink, 1, 5);
+
+        // Center the components within their cells
+        GridPane.setHalignment(firstNameLabel, HPos.CENTER);
+        GridPane.setHalignment(firstNameField, HPos.CENTER);
+        GridPane.setHalignment(lastNameLabel, HPos.CENTER);
+        GridPane.setHalignment(lastNameField, HPos.CENTER);
+        GridPane.setHalignment(emailLabel, HPos.CENTER);
+        GridPane.setHalignment(emailField, HPos.CENTER);
+        GridPane.setHalignment(dobLabel, HPos.CENTER);
+        GridPane.setHalignment(dobField, HPos.CENTER);
+        GridPane.setHalignment(dobField, HPos.CENTER);
+        GridPane.setHalignment(oldUserLink, HPos.CENTER);
+
+        // Create a VBox to center the grid and add the heading at the top
+        VBox vbox1 = new VBox(20); // 20 is the spacing between elements
+        vbox1.setAlignment(Pos.CENTER);
+        vbox1.getChildren().addAll(heading, regGrid);
+        vbox1.setStyle("-fx-background-color: black");
+
+        // Set up the scene and stage
+        Scene regScene1 = new Scene(vbox1, 600, 500);
+        primaryStage.setScene(regScene1);
+        primaryStage.show();
+
+        // Handle the register button action
+        dobField.setOnAction(e -> {
             // Registration logic goes here (e.g., saving the user's data)
             // For now, we'll just print the entered data to the console
             String firstName = firstNameField.getText();
