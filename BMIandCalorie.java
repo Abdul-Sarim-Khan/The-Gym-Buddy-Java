@@ -43,7 +43,8 @@ public class BMIandCalorie {
         addUIControls(gridPane);
         return gridPane;
     }
-
+    public static double b = 0.0;
+    public static double w = 0.0;
     private void addUIControls(GridPane gridPane) {
         gridPane.add(createLabel("Weight (kgs):"), 0, 0);
         gridPane.add(createTextField(), 1, 0);
@@ -62,6 +63,7 @@ public class BMIandCalorie {
 
 
         Label resultLabel = new Label();
+       
         resultLabel.getStyleClass().add("result-label");
         gridPane.add(resultLabel, 0, 7, 2, 1);
         
@@ -83,7 +85,7 @@ public class BMIandCalorie {
         ConditionLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
 
-       
+      
         
         calculateButton.setOnAction(e -> calculateBMIAndCalories(gridPane, resultLabel, ConditionLabel));
     }
@@ -123,6 +125,8 @@ public class BMIandCalorie {
 
         try {
             double weightKgs = Double.parseDouble(weightField.getText());
+            w = weightKgs;
+            
             double heightCm = Double.parseDouble(heightField.getText());
             int age = Integer.parseInt(ageField.getText());
             String gender = genderChoiceBox.getValue();
@@ -134,6 +138,7 @@ public class BMIandCalorie {
 
             double heightMeters = heightCm / 100.0;
             double bmi = weightKgs / (heightMeters * heightMeters);
+            b = bmi;
             String bmiText = String.format("%.2f", bmi);
             String bmiClassification = classifyBMI(bmi);
 
@@ -141,6 +146,7 @@ public class BMIandCalorie {
             String caloriesText = String.format("%.2f", estimatedCaloriesBurned);
 
             resultLabel.setText("BMI: " + bmiText + " (" + bmiClassification + ")\nEstimated Calorie Burn: " + caloriesText + " kcal/day");
+            
             resultLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
             String healthAdvice = getHealthAdvice(healthCondition);

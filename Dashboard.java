@@ -136,16 +136,30 @@ public class Dashboard {
         Label firstPlaceLabel = new Label("1st");
         firstPlaceLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
         leaderBoardContainer.getChildren().addAll(firstPlaceLabel);
-
-        Label pointsLabel = new Label("98");
+        
+       
+        int points = FitnessChallenge.x;
+        String point = String.valueOf(points); // Convert int to String
+        Label pointsLabel = new Label(point);
+        
         pointsLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
         pointsContainer.getChildren().addAll(pointsLabel);
 
-        Label bmiLabel = new Label("28.2");
+       
+        	double Bami = BMIandCalorie.b ;
+        	String bmiAsString = String.format("%.2f", Bami);
+        	
+        	
+        Label bmiLabel = new Label(bmiAsString);
         bmiLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
+        
         bmiContainer.getChildren().addAll(bmiLabel);
 
-        Label weightLabel = new Label("80 Kgs");
+        double wei = BMIandCalorie.w;
+        String weightAsString = String.format("%.2f", wei);
+        Label weightLabel = new Label(weightAsString);
+        
+        
         weightLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
         weightContainer.getChildren().addAll(weightLabel);
 
@@ -226,17 +240,17 @@ public class Dashboard {
         series.setName("Weight Data");
 
         // Add data points
-        series.getData().add(new XYChart.Data<>("4/16/2023", 30));
-        series.getData().add(new XYChart.Data<>("4/23/2023", 70));
-        series.getData().add(new XYChart.Data<>("4/30/2023", 50));
-        series.getData().add(new XYChart.Data<>("5/7/2023", 80));
-        series.getData().add(new XYChart.Data<>("5/14/2023", 60));
-        series.getData().add(new XYChart.Data<>("5/21/2023", 55));
-        series.getData().add(new XYChart.Data<>("5/28/2023", 65));
-        series.getData().add(new XYChart.Data<>("6/4/2023", 85));
-        series.getData().add(new XYChart.Data<>("6/11/2023", 100));
-        series.getData().add(new XYChart.Data<>("6/18/2023", 90));
-        series.getData().add(new XYChart.Data<>("6/25/2023", 75));
+        series.getData().add(new XYChart.Data<>("4/16/2024", 30));
+        series.getData().add(new XYChart.Data<>("4/23/2024", 70));
+        series.getData().add(new XYChart.Data<>("4/30/2024", 50));
+        series.getData().add(new XYChart.Data<>("5/7/2024", 80));
+        series.getData().add(new XYChart.Data<>("5/14/2024", 60));
+        series.getData().add(new XYChart.Data<>("5/21/2024", 55));
+        series.getData().add(new XYChart.Data<>("5/28/2024", 65));
+        series.getData().add(new XYChart.Data<>("6/4/2024", 85));
+        series.getData().add(new XYChart.Data<>("6/11/2024", 100));
+        series.getData().add(new XYChart.Data<>("6/18/2024", 90));
+        series.getData().add(new XYChart.Data<>("6/25/2024", 75));
 
         lineChart.getData().add(series);
 

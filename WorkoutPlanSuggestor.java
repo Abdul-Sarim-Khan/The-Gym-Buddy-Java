@@ -26,7 +26,7 @@ public class WorkoutPlanSuggestor {
         topBar.setAlignment(Pos.TOP_LEFT);
 
         // Create home button
-        Button homeButton = new Button("HOME");
+        Button homeButton = new Button("DASHBOARD");
         homeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
 
         // Mouse entered style

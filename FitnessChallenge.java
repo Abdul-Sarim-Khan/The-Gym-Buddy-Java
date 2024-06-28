@@ -14,7 +14,9 @@ import static application.ScreenShiftUtils.*;
 public class FitnessChallenge {
     private Stage ChallengeStage;
     private Scene mainScene;
-
+    public static int POINTS = 0;
+    public static int x = 0;
+    
     public void start(Stage ChallengeStage) {
         this.ChallengeStage = ChallengeStage;
 
@@ -23,7 +25,7 @@ public class FitnessChallenge {
         topBar.setAlignment(Pos.TOP_LEFT);
 
         // Create home button
-        Button homeButton = new Button("HOME");
+        Button homeButton = new Button("DASHBOARD");
         homeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
 
         // Mouse entered style
@@ -44,62 +46,62 @@ public class FitnessChallenge {
         topBar.setStyle("-fx-padding: 20px;");
 
         // Create heading label
-        Label headingLabel = new Label("Your Fitness Challenge For Today");
+        Label headingLabel = new Label("Your Fitness Challenge");
         headingLabel.setFont(new Font("Arial", 30));
         headingLabel.setStyle("-fx-text-fill: white;");
 
         // Create an array of challenges
         VBox[] challenges = new VBox[] {
-            createChallenge("10-minute brisk walk - 5 POINTS"),
-            createChallenge("20-minute yoga session - 10 POINTS"),
-            createChallenge("15-minute bodyweight circuit (push-ups, squats, lunges) - 15 POINTS"),
-            createChallenge("5-minute meditation - 5 POINTS"),
-            createChallenge("30-minute bike ride - 15 POINTS"),
-            createChallenge("20-minute jog - 15 POINTS"),
-            createChallenge("10 push-ups - 5 POINTS"),
-            createChallenge("15 sit-ups - 5 POINTS"),
-            createChallenge("20 squats - 5 POINTS"),
-            createChallenge("1-minute plank - 5 POINTS"),
-            createChallenge("15-minute stretching session - 10 POINTS"),
-            createChallenge("20 burpees - 10 POINTS"),
-            createChallenge("30 jumping jacks - 5 POINTS"),
-            createChallenge("10-minute dance session - 5 POINTS"),
-            createChallenge("1-hour hike - 20 POINTS"),
-            createChallenge("10 pull-ups - 10 POINTS"),
-            createChallenge("10-minute jump rope - 10 POINTS"),
-            createChallenge("20 lunges (each leg) - 10 POINTS"),
-            createChallenge("50-meter sprint - 10 POINTS"),
-            createChallenge("5 flights of stairs - 5 POINTS"),
-            createChallenge("10 tricep dips - 5 POINTS"),
-            createChallenge("15-minute swim - 15 POINTS"),
-            createChallenge("10-minute mindfulness walk - 5 POINTS"),
-            createChallenge("20-minute HIIT workout - 20 POINTS"),
-            createChallenge("15-minute Pilates session - 15 POINTS"),
-            createChallenge("10-minute core workout (crunches, leg raises, bicycles) - 10 POINTS"),
-            createChallenge("20 calf raises - 5 POINTS"),
-            createChallenge("30-second side planks (each side) - 5 POINTS"),
-            createChallenge("10-minute stair climbing - 10 POINTS"),
-            createChallenge("30-second mountain climbers - 5 POINTS"),
-            createChallenge("10 minutes of foam rolling - 5 POINTS"),
-            createChallenge("15-minute resistance band workout - 15 POINTS"),
-            createChallenge("10 kettlebell swings - 5 POINTS"),
-            createChallenge("5-minute breathing exercises - 5 POINTS"),
-            createChallenge("15-minute shadow boxing - 10 POINTS"),
-            createChallenge("1-mile walk/run - 10 POINTS"),
-            createChallenge("30 squats with a jump - 10 POINTS"),
-            createChallenge("10-minute tai chi session - 10 POINTS"),
-            createChallenge("15-minute rowing session - 15 POINTS"),
-            createChallenge("50 jumping jacks - 10 POINTS"),
-            createChallenge("15-minute stair workout - 15 POINTS"),
-            createChallenge("20-minute elliptical session - 20 POINTS"),
-            createChallenge("5-minute balance exercises - 5 POINTS"),
-            createChallenge("15-minute strength training (weights) - 15 POINTS"),
-            createChallenge("10 minutes of boxing/kickboxing - 10 POINTS"),
-            createChallenge("1-minute wall sit - 5 POINTS"),
-            createChallenge("10 burpees with a push-up - 10 POINTS"),
-            createChallenge("20 toe touches - 5 POINTS"),
-            createChallenge("15-minute light jogging in place - 10 POINTS"),
-            createChallenge("30-minute mixed cardio (bike, elliptical, rower) - 20 POINTS")
+            createChallenge("10-minute brisk walk - 20 POINTS", 5),
+            createChallenge("20-minute yoga session - 20 POINTS", 10),
+            createChallenge("20-minute bodyweight circuit (push-ups, squats, lunges) - 20 POINTS", 20),
+            createChallenge("5-minute meditation - 20 POINTS", 5),
+            createChallenge("30-minute bike ride - 20 POINTS", 20),
+            createChallenge("20-minute jog - 20 POINTS", 20),
+            createChallenge("10 push-ups - 20 POINTS", 5),
+            createChallenge("20 sit-ups - 20 POINTS", 5),
+            createChallenge("20 squats - 20 POINTS", 5),
+            createChallenge("1-minute plank - 20 POINTS", 5),
+            createChallenge("20-minute stretching session - 20 POINTS", 10),
+            createChallenge("20 burpees - 20 POINTS", 10),
+            createChallenge("30 jumping jacks - 20 POINTS", 5),
+            createChallenge("10-minute dance session - 20 POINTS", 5),
+            createChallenge("1-hour hike - 20 POINTS", 20),
+            createChallenge("10 pull-ups - 20 POINTS", 10),
+            createChallenge("10-minute jump rope - 20 POINTS", 10),
+            createChallenge("20 lunges (each leg) - 20 POINTS", 10),
+            createChallenge("50-meter sprint - 20 POINTS", 10),
+            createChallenge("5 flights of stairs - 20 POINTS", 5),
+            createChallenge("10 tricep dips - 20 POINTS", 5),
+            createChallenge("20-minute swim - 20 POINTS", 20),
+            createChallenge("10-minute mindfulness walk - 20 POINTS", 5),
+            createChallenge("20-minute HIIT workout - 20 POINTS", 20),
+            createChallenge("20-minute Pilates session - 20 POINTS", 20),
+            createChallenge("10-minute core workout (crunches, leg raises, bicycles) - 20 POINTS", 10),
+            createChallenge("20 calf raises - 20 POINTS", 5),
+            createChallenge("30-second side planks (each side) - 20 POINTS", 5),
+            createChallenge("10-minute stair climbing - 20 POINTS", 10),
+            createChallenge("30-second mountain climbers - 20 POINTS", 5),
+            createChallenge("10 minutes of foam rolling - 20 POINTS", 5),
+            createChallenge("20-minute resistance band workout - 20 POINTS", 20),
+            createChallenge("10 kettlebell swings - 20 POINTS", 5),
+            createChallenge("5-minute breathing exercises - 20 POINTS", 5),
+            createChallenge("20-minute shadow boxing - 20 POINTS", 20),
+            createChallenge("1-mile walk/run - 20 POINTS", 20),
+            createChallenge("30 squats with a jump - 20 POINTS", 10),
+            createChallenge("10-minute tai chi session - 20 POINTS", 10),
+            createChallenge("20-minute rowing session - 20 POINTS", 20),
+            createChallenge("50 jumping jacks - 20 POINTS", 10),
+            createChallenge("20-minute stair workout - 20 POINTS", 20),
+            createChallenge("20-minute elliptical session - 20 POINTS", 20),
+            createChallenge("5-minute balance exercises - 20 POINTS", 5),
+            createChallenge("20-minute strength training (weights) - 20 POINTS", 20),
+            createChallenge("10 minutes of boxing/kickboxing - 20 POINTS", 10),
+            createChallenge("1-minute wall sit - 20 POINTS", 5),
+            createChallenge("10 burpees with a push-up - 20 POINTS", 10),
+            createChallenge("20 toe touches - 20 POINTS", 5),
+            createChallenge("20-minute light jogging in place - 20 POINTS", 10),
+            createChallenge("30-minute mixed cardio (bike, elliptical, rower) - 20 POINTS", 20)
         };
 
         // Randomly select a challenge
@@ -124,7 +126,8 @@ public class FitnessChallenge {
         });
 
         doneButton.setOnAction(event -> {
-            showDashboard(ChallengeStage); // Close the current stage and show the dashboard
+            showDashboard(ChallengeStage);
+           POINTS += x;
         });
 
         grayBox.getChildren().add(doneButton);
@@ -143,8 +146,9 @@ public class FitnessChallenge {
         ChallengeStage.show();
     }
 
-    private VBox createChallenge(String description) {
+    private VBox createChallenge(String description, int points) {
         // Create description label
+    	x = points;
         Label descriptionLabel = new Label(description);
         descriptionLabel.setWrapText(true);
         descriptionLabel.setMaxWidth(400);  // Adjust the width as needed

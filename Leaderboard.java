@@ -14,34 +14,47 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static application.ScreenShiftUtils.*;
 
 public class Leaderboard{
-
+	
     public void start(Stage LeaderBoardStage) {
-        // Sample data for leaderboard
-        ObservableList<Player> leaderboardData = FXCollections.observableArrayList(
-                new Player("Player A", 3000),
-                new Player("Player B", 400),
-                new Player("Player C", 4500),
-                new Player("Player D", 4200),
-                new Player("Player E", 4000)
-        );
+ 	
 
-        // Sort leaderboard data in descending order with respect to points
-        List<Player> sortedPlayers = leaderboardData.stream()
-                .sorted(Comparator.comparingInt(Player::getPoints).reversed())
-                .collect(Collectors.toList());
+    	// Sample data for leaderboard
+    	ObservableList<Player> leaderboardData = FXCollections.observableArrayList();
+    	Set<Player> playerSet = new HashSet<>();
+    	
+    	String playerName = GYM_BUDDY.user;
+    	int playerPoints = FitnessChallenge.POINTS;
 
-        // Format sorted leaderboard data
-        ObservableList<String> formattedLeaderboardData = FXCollections.observableArrayList();
-        int position = 1;
-        for (Player player : sortedPlayers) {
-            formattedLeaderboardData.add(formatLeaderboardEntry(position++, player.getName(), player.getPoints()));
+    	// Add the initial player if not already added
+    	Player newPlayer = new Player(playerName, playerPoints);
+    	
+    	if (playerSet.add(newPlayer)) { // Only add if the set does not already contain the player
+            leaderboardData.add(newPlayer);
+        } else {
+            System.out.println("Player already exists in the leaderboard.");
         }
+    	
+    	
+
+    	// Sort leaderboard data in descending order with respect to points
+    	List<Player> sortedPlayers = leaderboardData.stream()
+    	        .sorted(Comparator.comparingInt(Player::getPoints).reversed())
+    	        .collect(Collectors.toList());
+
+    	// Format sorted leaderboard data
+    	ObservableList<String> formattedLeaderboardData = FXCollections.observableArrayList();
+    	int position = 1;
+    	for (Player player : sortedPlayers) {
+    	    formattedLeaderboardData.add(formatLeaderboardEntry(position++, player.getName(), player.getPoints()));
+    	}
 
         // Creating UI elements
         Label titleLabel = new Label("LEADERBOARD");
@@ -77,11 +90,12 @@ public class Leaderboard{
         LeaderBoardStage.show();
     }
 
+    
     private String formatLeaderboardEntry(int position, String playerName, int points) {
         return String.format("%-45s %-42s %d points", position, playerName, points);
     }
 
-    // Helper class to represent a player
+	 // Helper class to represent a player
     private static class Player {
         private final String name;
         private final int points;
@@ -90,11 +104,14 @@ public class Leaderboard{
             this.name = name;
             this.points = points;
         }
+        
+
 
         public String getName() {
             return name;
         }
 
+        
         public int getPoints() {
             return points;
         }
