@@ -126,7 +126,7 @@ public class GYM_BUDDY extends Application {
             String password = pwField.getText();
 
             if (verifyUserLogin(username, password, filePath, ",")) {
-            	showBMIandCalorie(primaryStage);
+            	showDashboard(primaryStage);
             } else {
                 System.out.println("Login failed. User not registered.");
                 // Display an alert or error message
@@ -293,71 +293,4 @@ public class GYM_BUDDY extends Application {
             return false;
         }
     }
-
-    private void showDashboard(Stage primaryStage) {
-        // Implementation of dashboard display
-        Label label = new Label("Welcome to the Dashboard!");
-        label.setFont(new Font("Arial", 24));
-        label.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;");
-        VBox vbox = new VBox(label);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.setStyle("-fx-background-color: black;");
-
-        Scene scene = new Scene(vbox, 600, 500);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
 }
-
-
-
-//ADD BELOW LOGICS PROPERLY IN LOGIN SCREEN AND REGISTRATION SCREEN 
-//ALSO CHECK IF THE USER ENTERED SAME PASSWORD IN THE "Password" AND "Confirm Password" FIELDS
-
-/*public static String filePath = "Data.txt"
-
-public static boolean writeToFile(String username, String password, String filePath){
-    try{
-        String text=username+","+password;
-        BufferedWriter f_writer= new BufferedWriter(new FileWriter(filePath));
-        f_writer.write(text);
-        System.out.println("Data written to a file!");
-    }catch(Exception e){
-        System.out.println(e);
-    }
-}
-        registerButton.setOnAction(e -> {
-            String username = usernameField.getText();
-            String password = pwField.getText();
-            String confirmPassword = confirmPwField.getText();
-            String email = emailField.getText();
-            writeToFile(username, password, filePath);
-            System.out.println("Account Registered successfully");
-            showLoginForm();
-        });
-        
-public static boolean verifyUserLogin(String username, String password, String filePath, String delimeter){
-    String currentLine;
-    String data[];
-
-    try{
-        FileReader fr = new FileReader(filePath);
-        BufferedReader br = new BufferedReader(fr);
-        while((currentLine = br.readLine())!=null){
-            data = currentLine.split(delimeter);
-            return (data[0].equals(username) &&  data[1].equals(password))?true:false;
-        }
-    }catch(Exception e){
-        System.out.println(e);
-    }
-}
-loginButton.setOnAction(e -> {
-            String username = userTextField.getText();
-            String password = pwField.getText();
-
-            if (verifyUserLogin(username, password, filePath, ",")) {
-                  showDashboard(primaryStage);
-            } else {
-                System.out.println("Login failed.");
-            }
-        });*/
