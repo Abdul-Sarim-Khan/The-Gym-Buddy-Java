@@ -124,9 +124,15 @@ public class FitnessChallenge {
         });
 
         doneButton.setOnAction(event -> {
-            showDashboard(ChallengeStage); // Close the current stage and show the dashboard
-        });
+            // Get the points from the selected challenge
+            String description = ((Label) selectedChallenge.getChildren().get(0)).getText();
+            int challengePoints = Integer.parseInt(description.split(" - ")[1].replace(" POINTS", ""));
 
+            // Update the user's points
+            GYM_BUDDY.points += challengePoints;
+            // Show the dashboard
+            showDashboard(ChallengeStage); 
+        });
         grayBox.getChildren().add(doneButton);
 
         // Create a VBox to hold the top bar, heading, and the gray box
@@ -142,7 +148,7 @@ public class FitnessChallenge {
         ChallengeStage.setScene(mainScene);
         ChallengeStage.show();
     }
-
+    
     private VBox createChallenge(String description) {
         // Create description label
         Label descriptionLabel = new Label(description);
