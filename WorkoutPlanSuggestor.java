@@ -231,7 +231,7 @@ public class WorkoutPlanSuggestor {
         mainContainer.getChildren().addAll(header, weekdayScheduleLabel, scheduleGrid, backButton);
 
         // Create a new scene with the scroll pane containing the main container
-        Scene newScene = new Scene(scrollPane, 1020, 700);
+        Scene newScene = new Scene(scrollPane, 1200, 1020);
 
         // Set the new scene on the primary stage
         primaryStage.setScene(newScene);
@@ -344,7 +344,7 @@ public class WorkoutPlanSuggestor {
         mainContainer.getChildren().addAll(header, weekdayScheduleLabel, scheduleGrid, backButton);
 
         // Create a new scene with the scroll pane containing the main container
-        Scene newScene = new Scene(scrollPane, 1020, 700);
+        Scene newScene = new Scene(scrollPane, 1200, 1020);
 
         // Set the new scene on the primary stage
         primaryStage.setScene(newScene);
@@ -434,7 +434,6 @@ public class WorkoutPlanSuggestor {
 
             for (String task : tasks) {
                 CheckBox taskCheckBox = new CheckBox(task);
-              //  taskCheckBox.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 14px;");
                 taskCheckBox.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
                 taskCheckBox.setOnMouseEntered(e -> taskCheckBox.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
                 taskCheckBox.setOnMouseExited(e -> taskCheckBox.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
@@ -455,7 +454,7 @@ public class WorkoutPlanSuggestor {
         mainContainer.getChildren().addAll(header, weekdayScheduleLabel, scheduleGrid, backButton);
 
         // Create a new scene with the scroll pane containing the main container
-        Scene newScene = new Scene(scrollPane, 1020, 700);
+        Scene newScene = new Scene(scrollPane, 1200, 1020);
 
         // Set the new scene on the primary stage
         primaryStage.setScene(newScene);
