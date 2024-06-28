@@ -294,6 +294,12 @@
 	    }
 	
 	    private boolean registerUser(String username, String password, String email) {
+	    	
+	    	if (username == null || username.isEmpty() || password == null || password.isEmpty() || email == null || email.isEmpty()) {
+	            System.out.println("All fields are required.");
+	            return false;
+	        }
+	    	
 	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
 	            writer.write(username + "," + password);
 	            writer.newLine();
