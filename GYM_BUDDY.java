@@ -146,7 +146,7 @@ public class GYM_BUDDY extends Application {
     public void showRegistrationForm(Stage primaryStage) {
     	
     	this.primaryStage = primaryStage;
-    	
+    	primaryStage.setTitle("THE GYM BUDDY");
         // Create the heading
         Label heading = new Label("REGISTER");
         heading.setFont(new Font("Arial", 24));

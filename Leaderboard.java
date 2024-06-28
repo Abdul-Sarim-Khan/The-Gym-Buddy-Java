@@ -56,7 +56,7 @@ public class Leaderboard{
         leaderboardListView.setPrefHeight(400);
         
         // Create a button to go back to the Dashboard
-        Button HomeButton = new Button("HOME");
+        Button HomeButton = new Button("DASHBOARD");
         HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
         HomeButton.setOnMouseEntered(e -> HomeButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
         HomeButton.setOnMouseExited(e -> HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
