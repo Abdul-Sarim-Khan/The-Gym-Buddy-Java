@@ -19,10 +19,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import static application.ScreenShiftUtils.*;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import static application.ScreenShiftUtils.*;
 
 public class Dashboard {
 
@@ -31,8 +32,8 @@ public class Dashboard {
     public static Stage DashboardStage;
 
     public void start(Stage stage) {
-    	DashboardStage = stage;
-    	
+        DashboardStage = stage;
+
         // Top bar with the dashboard label and clock
         Label dashboardLabel = new Label("Dashboard | Overview");
         dashboardLabel.setFont(new Font("Arial", 30));
@@ -71,36 +72,37 @@ public class Dashboard {
         Button challengesButton = createSidebarButton("Fitness Challenges");
         Button leaderboardButton = createSidebarButton("Leaderboard");
         Button logoutButton = createSidebarButton("Logout");
-        
-    /*  //Button Actions
+
+        // Button Actions
         BMIButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+            showBMIandCalorie(stage); // Pass the current stage to close it
         });
-        
+
         CalorieButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+            showBMIandCalorie(stage); // Pass the current stage to close it
         });
-        
+
         createAccountButton.setOnAction(event -> {
-            GYM_BUDDY.showRegistrationForm(stage); // Pass the current stage to close it
+            showRegistration(stage); // Pass the current stage to close it
         });
-        
+
         workoutPlanButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+            showWorkoutPlanSuggestor(stage); // Pass the current stage to close it
         });
-        
+
         challengesButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+        	showFitnessChallenge(stage); // Implement logic for challenges button action
         });
-        
+
         leaderboardButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+            showLeaderboard(stage); // Pass the current stage to close it
         });
-        
+
         logoutButton.setOnAction(event -> {
-            showDashboard(stage); // Pass the current stage to close it
+            // Implement logout logic here
+            stage.close(); // Close the current stage (assuming logout clears session)
         });
-        */
+
         // Button hover effects
         applyButtonHoverEffect(BMIButton);
         applyButtonHoverEffect(CalorieButton);
@@ -190,11 +192,11 @@ public class Dashboard {
         VBox container = new VBox();
         container.setStyle("-fx-background-color: #00C958; -fx-text-fill: " + textColor + "; -fx-font-size: " + fontSize + "px; -fx-font-weight: bold;");
         container.setMinSize(150, 100);
-        
+
         Label label = new Label(text);
         label.setStyle("-fx-text-fill: " + textColor + "; -fx-font-size: 20px; -fx-font-weight: bold;");
         container.getChildren().add(label);
-        
+
         container.setAlignment(Pos.CENTER);
         return container;
     }
@@ -260,8 +262,4 @@ public class Dashboard {
 
         return lineChart;
     }
-
-
-
-
 }

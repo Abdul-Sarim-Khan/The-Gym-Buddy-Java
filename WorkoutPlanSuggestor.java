@@ -47,7 +47,7 @@ public class WorkoutPlanSuggestor {
         topBar.setStyle("-fx-padding: 20px;");
         // Create heading label
         Label headingLabel = new Label("Choose Your Customized Workout Plan");
-        headingLabel.setFont(new Font("Arial", 24));
+        headingLabel.setFont(new Font("Arial", 30));
         headingLabel.setStyle("-fx-text-fill: white;");
 
         // Create three plans with descriptions
