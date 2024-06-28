@@ -138,7 +138,7 @@ public class Dashboard {
         leaderBoardContainer.getChildren().addAll(firstPlaceLabel);
         
        
-        int points = FitnessChallenge.x;
+        int points = FitnessChallenge.POINTS + FitnessChallenge.x;
         String point = String.valueOf(points); // Convert int to String
         Label pointsLabel = new Label(point);
         
