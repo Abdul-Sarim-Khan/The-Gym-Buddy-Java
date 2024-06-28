@@ -72,7 +72,7 @@ public class Dashboard {
         Button leaderboardButton = createSidebarButton("Leaderboard");
         Button logoutButton = createSidebarButton("Logout");
         
-      //Button Actions
+    /*  //Button Actions
         BMIButton.setOnAction(event -> {
             showDashboard(stage); // Pass the current stage to close it
         });
@@ -100,7 +100,7 @@ public class Dashboard {
         logoutButton.setOnAction(event -> {
             showDashboard(stage); // Pass the current stage to close it
         });
-        
+        */
         // Button hover effects
         applyButtonHoverEffect(BMIButton);
         applyButtonHoverEffect(CalorieButton);

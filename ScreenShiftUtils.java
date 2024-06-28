@@ -1,5 +1,6 @@
 package application;
 
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ScreenShiftUtils {
@@ -46,15 +47,17 @@ public class ScreenShiftUtils {
                 e.printStackTrace();
             }
     }
-        public static void Registration(Stage currentStage) {
+       /* public static void Registration(Stage currentStage) {
             try {
             	BMIandCalorie  bMIandCalorie  = new BMIandCalorie();
                 Stage newStage = new Stage();
-                bMIandCalorie .start(newStage);
+                GYM_BUDDY.primaryStage.start(newStage);
+                GYM_BUDDY.primaryStage.setScene(regScene);
+                primaryStage.show();
                 currentStage.close(); // Close the current stage
             } catch (Exception e) {
                 e.printStackTrace();
             }
     }
-    
+    */
 }
