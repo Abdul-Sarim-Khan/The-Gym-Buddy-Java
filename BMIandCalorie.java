@@ -1,6 +1,6 @@
 package application;
 
-import javafx.application.Application;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,21 +8,24 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import static application.ScreenShiftUtils.*;
 
-public class BMIandCalorie extends Application {
-
+public class BMIandCalorie {
+	private Stage primaryStage;
+	
     private static final String CSS_FILE = "styles.css";
 
-    @Override
+   
     public void start(Stage CalculationStage) {
+    	 primaryStage = CalculationStage;
         GridPane gridPane = createGridPane();
-        Scene scene = new Scene(gridPane, 700, 500);
+        Scene scene = new Scene(gridPane, 700, 600);
         scene.setFill(Color.web("#000000")); // Set scene background color
         scene.getStylesheets().add(getClass().getResource(CSS_FILE).toExternalForm());
 
-        CalculationStage.setTitle("BMI Calculator and Calorie Burn Estimation");
-        CalculationStage.setScene(scene);
-        CalculationStage.show();
+        primaryStage.setTitle("BMI Calculator and Calorie Burn Estimation");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     private GridPane createGridPane() {
@@ -57,16 +60,31 @@ public class BMIandCalorie extends Application {
         calculateButton.getStyleClass().add("calculate-button");
         gridPane.add(calculateButton, 0, 6, 2, 1);
 
-        Label ConditionLabel = new Label();
-        ConditionLabel.setPrefWidth(800); // Set preferred width to ensure full text is visible
-        ConditionLabel.setWrapText(true); // Enable text wrapping for long advice
-        gridPane.add(ConditionLabel, 0, 10, 2, 1);
-        ConditionLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
         Label resultLabel = new Label();
         resultLabel.getStyleClass().add("result-label");
         gridPane.add(resultLabel, 0, 7, 2, 1);
+        
+        Label ConditionLabel = new Label();
+        ConditionLabel.setPrefWidth(800); // Set preferred width to ensure full text is visible
+        ConditionLabel.setWrapText(true); // Enable text wrapping for long advice
+        gridPane.add(ConditionLabel, 0, 10, 2, 1);
+        
+        // Create a button to go back to the  Dashboard
+        Button HomeButton = new Button("BACK");
+        HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        HomeButton.setOnMouseEntered(e -> HomeButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
+        HomeButton.setOnMouseExited(e -> HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
+        HomeButton.setOnAction(event -> {
+            showDashboard(primaryStage); // Pass the current stage to close it
+        });
+        
+        gridPane.add(HomeButton, 0, 15, 2, 1);
+        ConditionLabel.setStyle("-fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold");
 
+
+       
+        
         calculateButton.setOnAction(e -> calculateBMIAndCalories(gridPane, resultLabel, ConditionLabel));
     }
 
@@ -194,7 +212,5 @@ public class BMIandCalorie extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }

@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import static application.ScreenShiftUtils.*;
 
 
 /*Username: admin
@@ -125,7 +126,7 @@ public class GYM_BUDDY extends Application {
             String password = pwField.getText();
 
             if (authenticate(username, password)) {
-            	showDashboard();
+            	showDashboard(primaryStage);
             	//showBMIandCalorie();
             	//showLeaderboard();
               	//showWorkoutPlanSuggestor();
@@ -262,20 +263,11 @@ public class GYM_BUDDY extends Application {
         // This is a simple example, in a real application you should check the credentials against a database or another secure source
         return "admin".equals(username) && "admin1".equals(password);
     }
-
-    private void showDashboard() {
-        try {
-            new Dashboard().start(new Stage());
-            primaryStage.close(); // Close the login stage
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
+  
     private void showBMIandCalorie() {
         try {
             new BMIandCalorie().start(new Stage());
-            primaryStage.close(); // Close the login stage
+            primaryStage.close(); // Close the current stage
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -284,7 +276,7 @@ public class GYM_BUDDY extends Application {
    private void showLeaderboard() {
         try {
             new Leaderboard().start(new Stage());
-            primaryStage.close(); // Close the login stage
+            primaryStage.close(); // Close the current stage
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -293,7 +285,7 @@ public class GYM_BUDDY extends Application {
     private void showWorkoutPlanSuggestor() {
         try {
             new WorkoutPlanSuggestor().start(new Stage());
-            primaryStage.close(); // Close the login stage
+            primaryStage.close(); // Close the current stage
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -301,3 +293,52 @@ public class GYM_BUDDY extends Application {
     
     
 }
+
+
+/*public static String filePath = "Data.txt"
+
+public static boolean writeToFile(String username, String password, String filePath){
+    try{
+        String text=username+","+password;
+        BufferedWriter f_writer= new BufferedWriter(new FileWriter(filePath));
+        f_writer.write(text);
+        System.out.println("Data written to a file!");
+    }catch(Exception e){
+        System.out.println(e);
+    }
+}
+        registerButton.setOnAction(e -> {
+            String username = usernameField.getText();
+            String password = pwField.getText();
+            String confirmPassword = confirmPwField.getText();
+            String email = emailField.getText();
+            writeToFile(username, password, filePath);
+            System.out.println("Account Registered successfully");
+            showLoginForm();
+        });
+        
+public static boolean verifyUserLogin(String username, String password, String filePath, String delimeter){
+    String currentLine;
+    String data[];
+
+    try{
+        FileReader fr = new FileReader(filePath);
+        BufferedReader br = new BufferedReader(fr);
+        while((currentLine = br.readLine())!=null){
+            data = currentLine.split(delimeter);
+            return (data[0].equals(username) &&  data[1].equals(password))?true:false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+}
+loginButton.setOnAction(e -> {
+            String username = userTextField.getText();
+            String password = pwField.getText();
+
+            if (verifyUserLogin(username, password, filePath, ",")) {
+                  showDashboard(primaryStage);
+            } else {
+                System.out.println("Login failed.");
+            }
+        });*/

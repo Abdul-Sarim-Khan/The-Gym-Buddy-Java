@@ -15,17 +15,24 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import static application.ScreenShiftUtils.*;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Dashboard {
 
-    public void start(Stage DashboardStage) {
+    // Define static fields for the scene and stage
+    public static Scene dashboardscene;
+    public static Stage DashboardStage;
+
+    public void start(Stage stage) {
+    	DashboardStage = stage;
+    	
         // Top bar with the dashboard label and clock
         Label dashboardLabel = new Label("Dashboard | Overview");
         dashboardLabel.setFont(new Font("Arial", 30));
@@ -57,15 +64,46 @@ public class Dashboard {
         gymBuddyLabel.setFont(new Font("Arial", 28));
         gymBuddyLabel.setStyle("-fx-text-fill: #00C958; -fx-font-weight: bold; -fx-padding: 20px ;");
 
-        Button homeButton = createSidebarButton("Home");
+        Button BMIButton = createSidebarButton("BMI Calculator");
+        Button CalorieButton = createSidebarButton("Calorie Burn Calculator");
         Button createAccountButton = createSidebarButton("Create User Account");
         Button workoutPlanButton = createSidebarButton("Workout Plan Suggestor");
         Button challengesButton = createSidebarButton("Fitness Challenges");
         Button leaderboardButton = createSidebarButton("Leaderboard");
         Button logoutButton = createSidebarButton("Logout");
-
+        
+      //Button Actions
+        BMIButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
+        CalorieButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
+        createAccountButton.setOnAction(event -> {
+            GYM_BUDDY.showRegistrationForm(stage); // Pass the current stage to close it
+        });
+        
+        workoutPlanButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
+        challengesButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
+        leaderboardButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
+        logoutButton.setOnAction(event -> {
+            showDashboard(stage); // Pass the current stage to close it
+        });
+        
         // Button hover effects
-        applyButtonHoverEffect(homeButton);
+        applyButtonHoverEffect(BMIButton);
+        applyButtonHoverEffect(CalorieButton);
         applyButtonHoverEffect(createAccountButton);
         applyButtonHoverEffect(workoutPlanButton);
         applyButtonHoverEffect(challengesButton);
@@ -80,7 +118,7 @@ public class Dashboard {
         logoutContainer.setPadding(new Insets(170, 0, 0, 0));
         VBox.setVgrow(logoutContainer, Priority.ALWAYS);
 
-        sidebar.getChildren().addAll(gymBuddyLabel, homeButton, createAccountButton, workoutPlanButton, challengesButton, leaderboardButton);
+        sidebar.getChildren().addAll(gymBuddyLabel, BMIButton, CalorieButton, createAccountButton, workoutPlanButton, challengesButton, leaderboardButton);
         sidebar.getChildren().add(logoutContainer);
         sidebar.setStyle("-fx-background-color: #333333; -fx-padding: 10;");
 
@@ -134,9 +172,9 @@ public class Dashboard {
         root.setLeft(sidebar);
         root.setCenter(mainContent);
 
-        Scene scene = new Scene(root, 1030, 660);
+        dashboardscene = new Scene(root, 1030, 685);
         DashboardStage.setTitle("Gym Buddy Dashboard");
-        DashboardStage.setScene(scene);
+        DashboardStage.setScene(dashboardscene);
         DashboardStage.show();
     }
 

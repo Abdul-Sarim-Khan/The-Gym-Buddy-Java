@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Background;
@@ -13,6 +14,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import static application.ScreenShiftUtils.*;
 
 public class Leaderboard{
 
@@ -38,18 +40,28 @@ public class Leaderboard{
         ListView<String> leaderboardListView = new ListView<>(leaderboardData);
         leaderboardListView.setStyle("-fx-control-inner-background: #333333; -fx-background-color: #00C958; -fx-font-size: 20px; -fx-font-weight: bold");
         leaderboardListView.setPrefHeight(400);
-
+        
+     // Create a button to go back to the  Dashboard
+        Button HomeButton = new Button("HOME");
+        HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+        HomeButton.setOnMouseEntered(e -> HomeButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
+        HomeButton.setOnMouseExited(e -> HomeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
+        HomeButton.setOnAction(event -> {
+            showDashboard(LeaderBoardStage); // Pass the current stage to close it
+        });
+        
         // VBox layout for the screen
         VBox vbox = new VBox(20);
         vbox.setPadding(new Insets(20));
         vbox.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0), CornerRadii.EMPTY, Insets.EMPTY))); // Set overall background color
-        vbox.getChildren().addAll(titleLabel, headingLabel, leaderboardListView);
+        vbox.getChildren().addAll(titleLabel, headingLabel, leaderboardListView, HomeButton);
 
         // Scene creation
         Scene scene = new Scene(vbox, 800, 600);
         LeaderBoardStage.setTitle("Leaderboard Screen");
         LeaderBoardStage.setScene(scene);
         LeaderBoardStage.show();
+        
     }
 
     private String formatLeaderboardEntry(int position, String playerName, int points) {

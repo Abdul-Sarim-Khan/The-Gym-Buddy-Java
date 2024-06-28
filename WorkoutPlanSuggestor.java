@@ -12,16 +12,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import static application.ScreenShiftUtils.*;
 
-public class WorkoutPlanSuggestor{
-
+public class WorkoutPlanSuggestor {
+    private Stage WorkoutStage;
     private Scene mainScene;
 
     public void start(Stage WorkoutStage) {
+        this.WorkoutStage = WorkoutStage;
+
         // Create an HBox layout for the top bar
         HBox topBar = new HBox();
         topBar.setAlignment(Pos.TOP_LEFT);
-        
+
         // Create home button
         Button homeButton = new Button("HOME");
         homeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
@@ -35,9 +38,13 @@ public class WorkoutPlanSuggestor{
         homeButton.setOnMouseExited(e -> {
             homeButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
         });
-        
-        topBar.getChildren().add(homeButton);
 
+        homeButton.setOnAction(event -> {
+            showDashboard(WorkoutStage); // Pass the current stage to close it
+        });
+
+        topBar.getChildren().add(homeButton);
+        topBar.setStyle("-fx-padding: 20px;");
         // Create heading label
         Label headingLabel = new Label("Choose Your Customized Workout Plan");
         headingLabel.setFont(new Font("Arial", 24));
@@ -66,8 +73,6 @@ public class WorkoutPlanSuggestor{
         
         outerVBox.setStyle("-fx-background-color: black;");
         
-        // Event handlers for buttons to open new pages
-        homeButton.setOnAction(event -> WorkoutStage.setScene(mainScene));
 
         // Set the title of the stage (window) and add the main scene to it
         WorkoutStage.setTitle("Workout Plan Suggestor");
@@ -222,7 +227,6 @@ public class WorkoutPlanSuggestor{
         backButton.setOnMouseEntered(e -> backButton.setStyle("-fx-background-color: white; -fx-text-fill: #00C958; -fx-font-size: 16px; -fx-font-weight: bold;"));
         backButton.setOnMouseExited(e -> backButton.setStyle("-fx-background-color: #00C958; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"));
         backButton.setOnAction(event -> primaryStage.setScene(mainScene));
-        
         // Assemble all parts in the main container
         mainContainer.getChildren().addAll(header, weekdayScheduleLabel, scheduleGrid, backButton);
 
