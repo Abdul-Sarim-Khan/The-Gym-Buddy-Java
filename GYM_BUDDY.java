@@ -23,8 +23,6 @@ import static application.ScreenShiftUtils.*;
 public class GYM_BUDDY extends Application {
     private Stage primaryStage;
     public static String filePath = "Data.txt";
-    public static int points = 0; // Add this variable to store the user's points
-
 
     public static void main(String[] args) {
         launch(args);
@@ -146,6 +144,9 @@ public class GYM_BUDDY extends Application {
     }
     
     public void showRegistrationForm(Stage primaryStage) {
+    	
+    	this.primaryStage = primaryStage;
+    	
         // Create the heading
         Label heading = new Label("REGISTER");
         heading.setFont(new Font("Arial", 24));
