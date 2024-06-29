@@ -9,7 +9,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.util.Random;
+import java.io.*;
 import static application.ScreenShiftUtils.*;
+
+import static application.GYM_BUDDY.*;
 
 public class FitnessChallenge {
     private Stage ChallengeStage;
@@ -126,8 +129,8 @@ public class FitnessChallenge {
         });
 
         doneButton.setOnAction(event -> {
+            updatePoints(user, x);
             showDashboard(ChallengeStage);
-           POINTS += x;
         });
 
         grayBox.getChildren().add(doneButton);
@@ -169,4 +172,38 @@ public class FitnessChallenge {
         return vbox;
     }
 
+    private void updatePoints(String username, int pointsToAdd) {
+        File file = new File(filePath);
+        StringBuilder newData = new StringBuilder();
+        boolean userFound = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(username)) {
+                    int currentPoints = Integer.parseInt(parts[2]); // Assuming points are stored at index 2
+                    int newPoints = currentPoints + pointsToAdd;
+                    POINTS = newPoints;
+                    newData.append(username).append(",").append(parts[1]).append(",").append(newPoints).append(System.lineSeparator());
+                    userFound = true;
+                } else {
+                    newData.append(line).append(System.lineSeparator());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (!userFound) {
+            newData.append(username).append(",").append("password").append(",").append(pointsToAdd).append(System.lineSeparator());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(newData.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

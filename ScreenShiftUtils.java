@@ -3,6 +3,8 @@ package application;
 import javafx.stage.Stage;
 
 public class ScreenShiftUtils {
+	
+	
     public static void showDashboard(Stage currentStage) {
         try {
             Dashboard dashboard = new Dashboard();
@@ -18,7 +20,7 @@ public class ScreenShiftUtils {
         try {
             Leaderboard leaderboard = new Leaderboard();
             Stage newStage = new Stage();
-            leaderboard.start(newStage);
+            leaderboard.start(newStage, Leaderboard.user);
             currentStage.close(); // Close the current stage
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,4 +66,16 @@ public class ScreenShiftUtils {
             e.printStackTrace();
         }
     }
+    
+    public static void showLogin(Stage currentStage) {
+        try {
+            GYM_BUDDY gymBuddy = new GYM_BUDDY();
+            Stage newStage = new Stage();
+            gymBuddy.showLoginForm(newStage);
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     }

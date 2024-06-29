@@ -37,7 +37,17 @@
 	        showLoginForm();
 	    }
 	
-	    private void showLoginForm() {
+	    public void showLoginForm() {
+	    	showLoginForm(this.primaryStage);
+	    	
+	    }
+	    
+	    
+	    public void showLoginForm(Stage primaryStage) {
+	    	
+	    	this.primaryStage = primaryStage;
+	    	primaryStage.setTitle("THE GYM BUDDY");
+	    	
 	        // Create the heading
 	        Label heading = new Label("WELCOME TO GYM BUDDY");
 	        heading.setFont(new Font("Arial", 24));
@@ -98,6 +108,7 @@
 	        loginGrid.add(pwField, 1, 1);
 	        loginGrid.add(loginButton, 1, 2);
 	        loginGrid.add(signUpLink, 1, 3);
+	        
 	
 	        // Center the components within their cells
 	        GridPane.setHalignment(userLabel, HPos.CENTER);
@@ -107,10 +118,18 @@
 	        GridPane.setHalignment(loginButton, HPos.CENTER);
 	        GridPane.setHalignment(signUpLink, HPos.CENTER);
 	
+	        
+
+            // Create the grid pane for Error
+	        GridPane ErrorGrid = new GridPane();
+	        ErrorGrid.setHgap(10);
+	        ErrorGrid.setVgap(10);
+	        ErrorGrid.setAlignment(Pos.CENTER); 
+	        
 	        // Create a VBox to center the grid and add the heading at the top
 	        VBox vbox = new VBox(20); // 20 is the spacing between elements
 	        vbox.setAlignment(Pos.CENTER);
-	        vbox.getChildren().addAll(heading, loginGrid);
+	        vbox.getChildren().addAll(heading, loginGrid, ErrorGrid);
 	        vbox.setStyle("-fx-background-color: black;");
 	
 	        // Set up the scene and stage
@@ -126,17 +145,21 @@
 	        	String username = userTextField.getText();
 	            String password = pwField.getText();
 	
-	           
+		        
+		        
+		        Label errorMessage = new Label("User not registered.");
+		       
+		        
 	            if (verifyUserLogin(username, password, filePath, ",")) {
 	            	
 	            	showDashboard(primaryStage);
 	            } else {
 	                System.out.println("Login failed. User not registered.");
 	                // Display an alert or error message
-	                Label errorMessage = new Label("User not registered.");
+	                
 	                errorMessage.setStyle("-fx-text-fill: #FF0000; -fx-font-size: 16px; -fx-font-weight: bold");
 	                if (!vbox.getChildren().contains(errorMessage)) {
-	                    vbox.getChildren().add(errorMessage);
+	                	 ErrorGrid.add(errorMessage, 0, 4);
 	                }
 	            }
 	        });
@@ -277,14 +300,15 @@
 	    private boolean verifyUserLogin(String username, String password, String filePath, String delimiter) {
 	        String currentLine;
 	        String[] data;
-	
+
 	        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 	            while ((currentLine = br.readLine()) != null) {
 	                data = currentLine.split(delimiter);
 	                if (data[0].equals(username) && data[1].equals(password)) {
-	                   user = username;
-	                	return true;
-	                   
+	                    user = username;
+	                    // Load the points
+	                    FitnessChallenge.POINTS = Integer.parseInt(data[2]);
+	                    return true;
 	                }
 	            }
 	        } catch (Exception e) {
@@ -292,16 +316,23 @@
 	        }
 	        return false;
 	    }
-	
+	    
+	    
 	    private boolean registerUser(String username, String password, String email) {
-	    	
-	    	if (username == null || username.isEmpty() || password == null || password.isEmpty() || email == null || email.isEmpty()) {
+	        if (username == null || username.isEmpty() || password == null || password.isEmpty() || email == null || email.isEmpty()) {
 	            System.out.println("All fields are required.");
 	            return false;
 	        }
-	    	
+	            else if (!email.contains("@") || !email.endsWith(".com")) {
+	                System.out.println("Invalid syntax of Email");
+	                return false;
+	            }
+	
+	            
+	       
+
 	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-	            writer.write(username + "," + password);
+	            writer.write(username + "," + password + "," + "0");  // Initialize points to 0
 	            writer.newLine();
 	            return true;
 	        } catch (Exception e) {
@@ -309,4 +340,6 @@
 	            return false;
 	        }
 	    }
+	    
+	    
 	}

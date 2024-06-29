@@ -72,6 +72,7 @@ public class Dashboard {
         Button challengesButton = createSidebarButton("Fitness Challenges");
         Button leaderboardButton = createSidebarButton("Leaderboard");
         Button logoutButton = createSidebarButton("Logout");
+        Button SwitchAccountButton = createSidebarButton("Switch Account");
 
         // Button Actions
         BMIButton.setOnAction(event -> {
@@ -97,6 +98,10 @@ public class Dashboard {
         leaderboardButton.setOnAction(event -> {
             showLeaderboard(stage); // Pass the current stage to close it
         });
+        
+        SwitchAccountButton.setOnAction(event -> {
+        	showLogin(stage); // Pass the current stage to close it
+        });
 
         logoutButton.setOnAction(event -> {
             // Implement logout logic here
@@ -111,6 +116,7 @@ public class Dashboard {
         applyButtonHoverEffect(challengesButton);
         applyButtonHoverEffect(leaderboardButton);
         applyButtonHoverEffect(logoutButton);
+        applyButtonHoverEffect(SwitchAccountButton);
 
         logoutButton.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
         applyButtonHoverEffect(logoutButton, "red", "#FF6666");
@@ -120,7 +126,7 @@ public class Dashboard {
         logoutContainer.setPadding(new Insets(170, 0, 0, 0));
         VBox.setVgrow(logoutContainer, Priority.ALWAYS);
 
-        sidebar.getChildren().addAll(gymBuddyLabel, BMIButton, CalorieButton, createAccountButton, workoutPlanButton, challengesButton, leaderboardButton);
+        sidebar.getChildren().addAll(gymBuddyLabel, BMIButton, CalorieButton, workoutPlanButton, challengesButton, leaderboardButton, SwitchAccountButton, createAccountButton);
         sidebar.getChildren().add(logoutContainer);
         sidebar.setStyle("-fx-background-color: #333333; -fx-padding: 10;");
 
@@ -133,9 +139,12 @@ public class Dashboard {
         VBox bmiContainer = createMainContainer("BMI", "black", 30);
         VBox weightContainer = createMainContainer("Weight", "black", 30);
 
-        Label firstPlaceLabel = new Label("1st");
-        firstPlaceLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
-        leaderBoardContainer.getChildren().addAll(firstPlaceLabel);
+        int pos = Leaderboard.p;
+        Label Position = new Label(Integer.toString(pos));
+        
+        
+        Position.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
+        leaderBoardContainer.getChildren().addAll(Position);
         
        
         int points = FitnessChallenge.POINTS;
@@ -188,7 +197,7 @@ public class Dashboard {
         root.setLeft(sidebar);
         root.setCenter(mainContent);
 
-        dashboardscene = new Scene(root, 1030, 685);
+        dashboardscene = new Scene(root, 1030, 730);
         DashboardStage.setTitle("Gym Buddy Dashboard");
         DashboardStage.setScene(dashboardscene);
         DashboardStage.show();
