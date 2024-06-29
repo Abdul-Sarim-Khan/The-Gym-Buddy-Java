@@ -185,7 +185,8 @@ public class FitnessChallenge {
                     int currentPoints = Integer.parseInt(parts[2]); // Assuming points are stored at index 2
                     int newPoints = currentPoints + pointsToAdd;
                     POINTS = newPoints;
-                    newData.append(username).append(",").append(parts[1]).append(",").append(newPoints).append(System.lineSeparator());
+                    // Corrected index usage and appending format
+                    newData.append(parts[0]).append(",").append(parts[1]).append(",").append(newPoints).append(",").append(parts[3]).append(System.lineSeparator());
                     userFound = true;
                 } else {
                     newData.append(line).append(System.lineSeparator());
@@ -196,7 +197,7 @@ public class FitnessChallenge {
         }
 
         if (!userFound) {
-            newData.append(username).append(",").append("password").append(",").append(pointsToAdd).append(System.lineSeparator());
+        	newData.append(username).append(",").append("password").append(",").append(pointsToAdd).append(",").append("default position").append(System.lineSeparator());
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {

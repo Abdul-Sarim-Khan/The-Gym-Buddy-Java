@@ -139,6 +139,7 @@ public class BMIandCalorie {
             double heightMeters = heightCm / 100.0;
             double bmi = weightKgs / (heightMeters * heightMeters);
             b = bmi;
+            
             String bmiText = String.format("%.2f", bmi);
             String bmiClassification = classifyBMI(bmi);
 

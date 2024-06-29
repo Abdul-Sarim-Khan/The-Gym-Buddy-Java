@@ -16,9 +16,14 @@
 	import javafx.stage.Stage;
 	import java.io.BufferedReader;
 	import java.io.BufferedWriter;
-	import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 	import java.io.FileWriter;
-	import static application.ScreenShiftUtils.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static application.ScreenShiftUtils.*;
 	
 	
 	public class GYM_BUDDY extends Application {
@@ -41,7 +46,7 @@
 	    	showLoginForm(this.primaryStage);
 	    	
 	    }
-	    
+	    public String regerror;
 	    
 	    public void showLoginForm(Stage primaryStage) {
 	    	
@@ -308,9 +313,15 @@
 	                    user = username;
 	                    // Load the points
 	                    FitnessChallenge.POINTS = Integer.parseInt(data[2]);
+	                    //Load the Position
+	                    Leaderboard.pos = Integer.parseInt(data[3]);
+	                    updateUserPosition(username, Leaderboard.pos);
+
 	                    return true;
 	                }
 	            }
+	        } catch (FileNotFoundException e) {
+	            return false;
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -332,7 +343,7 @@
 	       
 
 	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-	            writer.write(username + "," + password + "," + "0");  // Initialize points to 0
+	            writer.write(username + "," + password + "," + "0" + "," + "0");  // Initialize points and Position to 0
 	            writer.newLine();
 	            return true;
 	        } catch (Exception e) {
@@ -341,5 +352,33 @@
 	        }
 	    }
 	    
+	    
+	    public static void updateUserPosition(String username, int newPosition) {
+	        List<String> fileContent = new ArrayList<>();
+	        String currentLine;
+	        String delimiter = ",";
+
+	        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+	            while ((currentLine = br.readLine()) != null) {
+	                String[] data = currentLine.split(delimiter);
+	                if (data[0].equals(username)) {
+	                    data[3] = String.valueOf(newPosition); // Update the position
+	                    currentLine = String.join(delimiter, data);
+	                }
+	                fileContent.add(currentLine);
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+	            for (String line : fileContent) {
+	                writer.write(line);
+	                writer.newLine();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	    
 	}

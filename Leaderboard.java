@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 // Leaderboard Class
 
 public class Leaderboard {
-    public static int p; //I WANT USER POSITION TO BE STORED IN HERE SO I CAN EXPORT THIS VARIABLE TO OTHER CLASSES [POSITION IS STORED IN Data.txt  (Example: <name><password><points><position>]
+    public static int pos; 
     public static String user;
     
     public void start(Stage LeaderBoardStage, String loggedInUser) {
@@ -108,37 +109,51 @@ public class Leaderboard {
     private String formatLeaderboardEntry(int position, String playerName, int points) {
         return String.format("%-45s %-42s %d points", position, playerName, points);
     }
+    
+    public static void updatePositionInFile(String playerName, int position) {
+    	
+        List<String> fileContent = new ArrayList<>();
 
-    private void updatePositionInFile(String playerName, int position) {
-        File inputFile = new File(GYM_BUDDY.filePath);
-        StringBuilder newData = new StringBuilder();
-        
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+        // Read all lines from the file into the list
+        try (BufferedReader reader = new BufferedReader(new FileReader(GYM_BUDDY.filePath))) {
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
-                String[] data = currentLine.split(",");
-                if (data[0].equals(playerName)) {
-                    newData.append(data[0]).append(",").append(data[1]).append(",").append(data[2]).append(",").append(position).append(System.lineSeparator());
-                   
-                } else {
-                    newData.append(currentLine).append(System.lineSeparator());
-                }
-               
+                fileContent.add(currentLine);
             }
-            
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile))) {
-            writer.write(newData.toString());
-            
+        // Update the specific player's position in the list
+        boolean playerFound = false;
+        for (int i = 0; i < fileContent.size(); i++) {
+            String line = fileContent.get(i);
+            String[] data = line.split(",");
+            if (data[0].equals(playerName)) {
+                fileContent.set(i, data[0] + "," + data[1] + "," + data[2] + "," + position);
+                pos = position;
+                playerFound = true;
+                break;
+            }
+        }
+
+        if (!playerFound) {
+            System.out.println("Player not found: " + playerName);
+        }
+
+        // Write the updated list back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(GYM_BUDDY.filePath))) {
+            for (String line : fileContent) {
+                writer.write(line);
+                writer.newLine();
+            }
+            writer.flush(); // Flush the output to ensure it's written immediately
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
     // Helper class to represent a player
     class Player {
         private final String name;

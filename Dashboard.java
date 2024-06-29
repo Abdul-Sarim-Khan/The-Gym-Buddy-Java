@@ -19,10 +19,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import static application.ScreenShiftUtils.*;
 
 public class Dashboard {
@@ -84,6 +82,8 @@ public class Dashboard {
         });
 
         createAccountButton.setOnAction(event -> {
+        	BMIandCalorie.w = 0;
+        	BMIandCalorie.b = 0;
             showRegistration(stage); // Pass the current stage to close it
         });
 
@@ -100,11 +100,14 @@ public class Dashboard {
         });
         
         SwitchAccountButton.setOnAction(event -> {
+        	BMIandCalorie.w = 0;
+        	BMIandCalorie.b = 0;
         	showLogin(stage); // Pass the current stage to close it
         });
 
         logoutButton.setOnAction(event -> {
-            // Implement logout logic here
+        	BMIandCalorie.w = 0;
+        	BMIandCalorie.b = 0;
             stage.close(); // Close the current stage (assuming logout clears session)
         });
 
@@ -139,7 +142,10 @@ public class Dashboard {
         VBox bmiContainer = createMainContainer("BMI", "black", 30);
         VBox weightContainer = createMainContainer("Weight", "black", 30);
 
-        int pos = Leaderboard.p;
+        
+        
+        int pos = Leaderboard.pos; // Your logic to calculate new position
+        GYM_BUDDY.updateUserPosition(GYM_BUDDY.user, Leaderboard.pos);
         Label Position = new Label(Integer.toString(pos));
         
         
@@ -155,8 +161,8 @@ public class Dashboard {
         pointsContainer.getChildren().addAll(pointsLabel);
 
        
-        	double Bami = BMIandCalorie.b ;
-        	String bmiAsString = String.format("%.2f", Bami);
+        double Bami = BMIandCalorie.b ;
+       	String bmiAsString = String.format("%.2f", Bami);
         	
         	
         Label bmiLabel = new Label(bmiAsString);
